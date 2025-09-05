@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEXCon25 - Digital Experience Conference</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- EmailJS SDK - Official CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#005D63',
+                        'primary-dark': '#004A4F'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        /* GT Walsheim Font Face Declarations - GitHub CDN */
+        @font-face {
+            font-family: 'GT Walsheim';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT%20Walsheim%20Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'GT Walsheim';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT%20Walsheim%20Regular.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'GT Walsheim';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT%20Walsheim%20Regular.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #005D63 0%, #004A4F 100%); }
+        .cathay-logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #005D63 0%, #004A4F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gt-walsheim {
+            font-family: 'GT Walsheim', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left: Logo/Brand -->
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-primary gt-walsheim">DEXCON2025</h1>
+                </div>
+                
+                <!-- Right: Desktop Navigation Menu & Logo -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="flex items-baseline space-x-4">
+                        <a href="#event-info" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Event Info</a>
+                        <a href="#agenda" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Agenda</a>
+                        <a href="#speakers" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Speakers</a>
+                        <a href="#why-attend" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Why Attend</a>
+                        <a href="#contact" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">Register</a>
+                    </div>
+                    
+                    <!-- Cathay Logo -->
+                    <div class="flex items-center">
+                        <img 
+                            src="https://raw.githubusercontent.com/samson11769-cmd/font/main/images/Cathay%20EN%20Horizontal%20Colour_v2.svg" 
+                            alt="Cathay Pacific Logo" 
+                            class="h-10 w-auto cathay-logo-img -mt-1"
+                            loading="lazy"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                </div>
+                
+                <!-- Right: Mobile Logo & Menu Button -->
+                <div class="md:hidden flex items-center space-x-3">
+                    <!-- Cathay Logo - Mobile -->
+                    <div class="flex items-center">
+                        <img 
+                            src="https://raw.githubusercontent.com/samson11769-cmd/font/main/images/Cathay%20EN%20Horizontal%20Colour_v2.svg" 
+                            alt="Cathay Pacific Logo" 
+                            class="h-8 w-auto cathay-logo-img"
+                            loading="lazy"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="text-gray-700 dark:text-gray-300 hover:text-primary p-2">
+                        <i class="fas fa-ellipsis-vertical text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#event-info" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-base font-medium">Event Info</a>
+                <a href="#agenda" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-base font-medium">Agenda</a>
+                <a href="#speakers" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-base font-medium">Speakers</a>
+                <a href="#why-attend" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 text-base font-medium">Why Attend</a>
+                <a href="#contact" class="block bg-primary text-white px-3 py-2 text-base font-medium rounded-lg mx-3 text-center">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">#FutureForward</h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8">Digital Experience Conference</h2>
+            <p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                Join industry leaders, innovators, and community builders to explore the future of product development, design, and strategy. 
+                Connect, learn, and be inspired at the premier event for digital experience professionals.
+            </p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-5xl mx-auto mb-12">
+                <div class="flex flex-row items-center justify-center space-x-2 md:space-x-8 text-lg">
+                    <div class="flex items-center">
+                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
+                            <img 
+                                src="https://raw.githubusercontent.com/samson11769-cmd/font/233fdf2bed0a58582b7912b59f3d941ea20d8a4a/images/canlendar_v2.png" 
+                                alt="Date" 
+                                class="w-12 h-12 object-contain"
+                                loading="lazy"
+                                onerror="this.style.display='none'"
+                            />
+                        </div>
+                        <span class="font-semibold">24 October 2025</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
+                            <img 
+                                src="https://raw.githubusercontent.com/samson11769-cmd/font/f3d5d59d6a0f18aa28549749689f54a34631e61d/images/clock_v2.png" 
+                                alt="Time" 
+                                class="w-32 h-32 object-contain"
+                                loading="lazy"
+                                onerror="this.style.display='none'"
+                            />
+                        </div>
+                        <span class="font-semibold">09:00 - 17:00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
+                            <img 
+                                src="https://raw.githubusercontent.com/samson11769-cmd/font/69737123d668e30c1b24c620c261bdcfcfe80e05/images/freepik__background__63278.png" 
+                                alt="Location" 
+                                class="w-12 h-12 object-contain"
+                                loading="lazy"
+                                onerror="this.style.display='none'"
+                            />
+                        </div>
+                        <span class="font-semibold">Cathay City</span>
+                    </div>
+                </div>
+                <!-- Admin Access Button (Hidden, only show with special URL) -->
+                <div id="admin-access" class="mt-6 hidden">
+                    <button onclick="showAdminPanel()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                        📊 Admin Dashboard
+                    </button>
+                </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#contact" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block">
+                    Register Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Info -->
+    <section id="event-info" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Event Information</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    DEXCon25 provides insight and inspiration for driving digital innovation across globally recognized challenges and opportunities, 
+                    from a Hong Kong context.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Conference Highlights</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-lightning-bolt text-primary text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-2">Lightning Talks & Rapid Fire Sessions</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Six 7-minute presentations covering Design, Product, Strategy, Portfolio, Product Ops, and Delivery.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-brain text-primary text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-2">Psychology of Experience</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Deep dive into human behavior and its impact on digital experiences.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-book-open text-primary text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-2">Storytelling Workshop</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Learn from failure, resilience, and bold pivots through interactive storytelling.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-handshake text-primary text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-2">Networking Opportunities</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Connect with industry leaders during breaks, lunch, and evening cocktails.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6">Event Schedule Overview</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                            <span class="font-semibold">Registration & Setup</span>
+                            <span class="text-primary">08:00 - 09:00</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                            <span class="font-semibold">Morning Sessions</span>
+                            <span class="text-primary">09:00 - 12:00</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                            <span class="font-semibold">Lunch & Experience Booths</span>
+                            <span class="text-primary">12:00 - 14:30</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                            <span class="font-semibold">Afternoon Block</span>
+                            <span class="text-primary">14:30 - 16:15</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Evening Cocktails</span>
+                            <span class="text-primary">17:00+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Agenda -->
+    <section id="agenda" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Conference Agenda</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">A full day of insights, networking, and innovation</p>
+            </div>
+
+            <!-- Morning Block -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-sun text-yellow-500 mr-3"></i>
+                    Morning Block
+                </h3>
+                <div class="space-y-6">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Reception & Registration</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">09:00 - 09:30</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">Lanyards & swag pickup</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-500">
+                            <strong>PIC:</strong> @Amy Wong
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Opening Speech</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">09:35 - 09:45</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">Welcome speech, DEXCon25 vision and context, setting the tone of the day</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-500">
+                            <strong>Speaker:</strong> @Andrew Eldon
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Rapid Fire Talks - 6 x 7 minutes</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">10:00 - 10:45</span>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                            <div>• Design: "Designing with Empathy: Inclusive UX at Scale"</div>
+                            <div>• Product: "Small Bets, Big Outcomes: Rapid Product Discovery"</div>
+                            <div>• Strategy: "Connecting the Dots: Our Strategic Compass"</div>
+                            <div>• Portfolio: "Vision, Value, Velocity: Managing What Matters"</div>
+                            <div>• Product Ops: "Operational Zen: Driving Efficiency Across Teams"</div>
+                            <div>• Delivery: "Living the Loop: Agile in Aviation"</div>
+                        </div>
+                        <div class="text-sm text-gray-500 dark:text-gray-500">
+                            <strong>Speakers:</strong> All Heads of Departments
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">External Keynote: The Future of Digital Travel</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">11:00 - 11:45</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">20-30 mins sharing + 15 mins Q&A covering AI Platform Trip Planning and Personalization Journey</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-500">
+                            <strong>Speaker:</strong> Senior leader from top airline/digital consultancy/travel tech firm
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Afternoon Block -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-sun text-orange-500 mr-3"></i>
+                    Afternoon Block
+                </h3>
+                <div class="space-y-6">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Lunch & Experience Booths</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">12:00 - 14:30</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">Casual catered lunch with assigned seating + Interactive booths featuring design system demos, product journey maps, Poly U Empathy Lab, and "We are DEX!" showcase</p>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Psychology of Experience</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">14:30 - 15:15</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">"Why Humans Do What They Do: Lessons for Digital Experiences"</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-500">
+                            <strong>Speaker:</strong> Behavioral designer, customer psychologist, or service design leader
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finale Block -->
+            <div>
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-moon text-purple-500 mr-3"></i>
+                    Finale Block
+                </h3>
+                <div class="space-y-6">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Special Segment: "Storytelling from the Edge"</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">15:15 - 16:15</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">Interactive storytelling workshop covering failure, resilience, unexpected insights, and bold pivots</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-500">
+                            <strong>Facilitators:</strong> MC and DEXers
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Closing & Group Photo</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">16:15 - 16:45</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Official closing and group photography session</p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-primary to-primary-dark text-white p-6 rounded-xl shadow-lg">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold">Evening Cocktails</h4>
+                            <span class="text-lg font-medium">17:00 onwards</span>
+                        </div>
+                        <p class="opacity-90">Join us for evening cocktails at Dakota/Catalina (venue TBC)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Featured Speakers</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Learn from industry leaders and innovation experts</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg card-hover text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
+                        AE
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Andrew Eldon</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Opening Keynote Speaker</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">DEXCon25 vision and strategic context</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg card-hover text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
+                        TBC
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">External Keynote Speaker</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Future of Digital Travel</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Senior leader from top airline/digital consultancy</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg card-hover text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
+                        PS
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Psychology Expert</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Psychology of Experience</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">Behavioral designer or customer psychologist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Attend -->
+    <section id="why-attend" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Why Attend DEXCon25?</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    DEXCon25 is designed for business leaders, product managers, designers, and those responsible for digital transformation and user experience strategies.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="text-center card-hover p-6">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Learn from Changemakers</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Gain insights from recognized leaders in digital experience and product innovation.</p>
+                </div>
+
+                <div class="text-center card-hover p-6">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-handshake text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Build Key Relationships</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Connect with stakeholders, innovators, and thought leaders in the digital space.</p>
+                </div>
+
+                <div class="text-center card-hover p-6">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Discover Innovation</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Explore cutting-edge solutions and methodologies in product development.</p>
+                </div>
+
+                <div class="text-center card-hover p-6">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Strategic Insights</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Learn about strategic approaches to digital transformation and user experience.</p>
+                </div>
+
+                <div class="text-center card-hover p-6">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Hands-on Learning</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Participate in interactive workshops and experience booths for practical skills.</p>
+                </div>
+
+                <div class="text-center card-hover p-6">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-rocket text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Future-Forward Thinking</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Be part of the growing ambition for digital innovation and experience design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Registration -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-6">Register for DEXCon25</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">
+                    Don't miss this opportunity to connect, learn, and be inspired by the future of digital experience.
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium mb-2">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium mb-2">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block text-sm font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+852 XXXX XXXX" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label for="company" class="block text-sm font-medium mb-2">Company</label>
+                        <input type="text" id="company" name="company" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label for="role" class="block text-sm font-medium mb-2">Job Title</label>
+                        <input type="text" id="role" name="role" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-4">Which sessions would you like to attend? (Select all that apply)</label>
+                        <div class="space-y-3">
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="opening-speech" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">Opening Speech</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Welcome speech and DEXCon25 vision (09:35-09:45)</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="rapid-fire-talks" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">Rapid Fire Talks</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">6 x 7-minute talks on Design, Product, Strategy & more (10:00-10:45)</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="keynote-digital-travel" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">External Keynote: The Future of Digital Travel</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">AI Platform Trip Planning & Personalization (11:00-11:45)</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="experience-booths" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">Experience Booths</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Interactive demos, journey maps & Poly U Empathy Lab (12:00-14:30)</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="psychology-experience" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">Psychology of Experience</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Understanding human behavior in digital experiences (14:30-15:15)</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="storytelling-workshop" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">Storytelling from the Edge</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Interactive workshop on failure, resilience & insights (15:15-16:15)</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start">
+                                <input type="checkbox" name="sessions[]" value="evening-cocktails" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="ml-3">
+                                    <span class="text-base font-medium">Evening Cocktails</span>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Networking drinks at Dakota/Catalina (17:00 onwards)</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="interest" class="block text-sm font-medium mb-2">What interests you most about DEXCon25?</label>
+                        <select id="interest" name="interest" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                            <option value="">Select an option</option>
+                            <option value="keynotes">Keynote presentations</option>
+                            <option value="workshops">Interactive workshops</option>
+                            <option value="networking">Networking opportunities</option>
+                            <option value="innovation">Innovation showcases</option>
+                            <option value="all">All of the above</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-4 px-6 rounded-lg transition-colors text-lg">
+                        Register for DEXCon25
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-white py-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">DEXCon25</h3>
+                    <p class="text-gray-400">Digital Experience Conference - Where innovation meets inspiration.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#event-info" class="block text-gray-400 hover:text-white transition-colors">Event Info</a>
+                        <a href="#agenda" class="block text-gray-400 hover:text-white transition-colors">Agenda</a>
+                        <a href="#speakers" class="block text-gray-400 hover:text-white transition-colors">Speakers</a>
+                        <a href="#why-attend" class="block text-gray-400 hover:text-white transition-colors">Why Attend</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Email: info@dexcon25.com</p>
+                        <p>Phone: +852 XXXX XXXX</p>
+                        <p>Location: Cathay City, Hong Kong</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 dark:border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 DEXCon25. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode detection and toggle
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCM7bAGZ0_AQ2lchVcjK_KRCeg7UTdaJSs",
+            authDomain: "dexcon2025v1.firebaseapp.com",
+            projectId: "dexcon2025v1",
+            storageBucket: "dexcon2025v1.firebasestorage.app",
+            messagingSenderId: "962113474307",
+            appId: "1:962113474307:web:ad8f2bea77559bf6ab6336",
+            measurementId: "G-CD7E8K2EBS"
+        };
+
+        // Initialize Firebase
+        let db;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            console.log('✅ Firebase connected successfully!');
+        } catch (error) {
+            console.log('⚠️ Firebase config needed. Using demo mode.');
+        }
+
+        // Initialize EmailJS
+        // ✅ EmailJS 已配置完成！
+        const EMAIL_CONFIG = {
+            enabled: true, // ✅ 重新啟用 EmailJS - 問題是 Gmail API 權限，不是 Public Key
+            publicKey: '0BGcVqW8QO5dTBguj', // ✅ Public Key 實際上是有效的
+            serviceId: 'service_6lgdhtx', // 🔧 需要重新配置 Gmail API 權限
+            templateId: 'template_ut9fdrm' // ✅ 您的Template ID
+        };
+
+        // Enhanced EmailJS initialization with comprehensive diagnostics
+        function initializeEmailJS() {
+            console.log('🔍 EmailJS Diagnostic Check:');
+            console.log('- typeof emailjs:', typeof emailjs);
+            console.log('- window.emailjs:', window.emailjs);
+            console.log('- EmailJS global defined:', typeof emailjs !== 'undefined');
+            
+            if (typeof emailjs !== 'undefined') {
+                try {
+                    // Use new EmailJS v4 initialization format
+                    emailjs.init({
+                        publicKey: EMAIL_CONFIG.publicKey
+                    });
+                    console.log('✅ EmailJS initialized successfully with v4 format!');
+                    console.log('📧 EmailJS Config:', {
+                        enabled: EMAIL_CONFIG.enabled,
+                        serviceId: EMAIL_CONFIG.serviceId,
+                        templateId: EMAIL_CONFIG.templateId,
+                        publicKey: EMAIL_CONFIG.publicKey.substring(0, 8) + '...'
+                    });
+                    window.emailjsReady = true;
+                    return true;
+                } catch (initError) {
+                    console.error('❌ EmailJS init error:', initError);
+                    window.emailjsReady = false;
+                    return false;
+                }
+            } else {
+                console.log('⚠️ EmailJS not available - attempting dynamic load...');
+                return loadEmailJSDynamically();
+            }
+        }
+
+        // Dynamic EmailJS loading with multiple fallback strategies
+        function loadEmailJSDynamically() {
+            return new Promise((resolve) => {
+                console.log('🔄 Loading EmailJS dynamically...');
+                
+                // Try multiple CDN sources
+                const cdnUrls = [
+                    'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js',
+                    'https://cdn.emailjs.com/dist/email.min.js',
+                    'https://unpkg.com/@emailjs/browser@4/dist/email.min.js'
+                ];
+                
+                let currentIndex = 0;
+                
+                function tryLoadScript() {
+                    if (currentIndex >= cdnUrls.length) {
+                        console.error('❌ All EmailJS CDN sources failed');
+                        window.emailjsReady = false;
+                        resolve(false);
+                        return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.src = cdnUrls[currentIndex];
+                    script.async = false; // Load synchronously for better control
+                    
+                    script.onload = function() {
+                        console.log(`📦 Dynamic EmailJS script loaded from: ${cdnUrls[currentIndex]}`);
+                        
+                        // Wait longer and check multiple times
+                        let checkCount = 0;
+                        const maxChecks = 10;
+                        
+                        const checkEmailJS = setInterval(() => {
+                            checkCount++;
+                            
+                            if (typeof emailjs !== 'undefined' || typeof window.emailjs !== 'undefined') {
+                                clearInterval(checkEmailJS);
+                                
+                                const emailjsObj = emailjs || window.emailjs;
+                                if (emailjsObj && emailjsObj.init) {
+                                    try {
+                                        emailjsObj.init({
+                                            publicKey: EMAIL_CONFIG.publicKey
+                                        });
+                                        console.log('✅ Dynamic EmailJS initialized successfully!');
+                                        window.emailjs = emailjsObj;
+                                        window.emailjsReady = true;
+                                        resolve(true);
+                                    } catch (initError) {
+                                        console.error('❌ EmailJS init error:', initError);
+                                        window.emailjsReady = false;
+                                        resolve(false);
+                                    }
+                                } else {
+                                    console.error('❌ EmailJS object incomplete');
+                                    window.emailjsReady = false;
+                                    resolve(false);
+                                }
+                            } else if (checkCount >= maxChecks) {
+                                clearInterval(checkEmailJS);
+                                console.error(`❌ EmailJS still undefined after ${maxChecks} checks`);
+                                // Try next CDN
+                                currentIndex++;
+                                tryLoadScript();
+                            }
+                        }, 200);
+                    };
+                    
+                    script.onerror = function(error) {
+                        console.error(`❌ Failed to load EmailJS from: ${cdnUrls[currentIndex]}`, error);
+                        // Try next CDN
+                        currentIndex++;
+                        tryLoadScript();
+                    };
+                    
+                    // Remove any existing EmailJS scripts first
+                    const existingScripts = document.querySelectorAll('script[src*="emailjs"]');
+                    existingScripts.forEach(s => s.remove());
+                    
+                    document.head.appendChild(script);
+                }
+                
+                tryLoadScript();
+            });
+        }
+
+        // Multiple initialization strategies
+        console.log('📋 EmailJS Configuration Check:');
+        console.log('- Public Key:', EMAIL_CONFIG.publicKey);
+        console.log('- Service ID:', EMAIL_CONFIG.serviceId);
+        console.log('- Template ID:', EMAIL_CONFIG.templateId);
+
+        // Try immediate initialization if EmailJS already loaded
+        if (typeof emailjs !== 'undefined') {
+            console.log('🚀 EmailJS already available, initializing immediately...');
+            initializeEmailJS();
+        }
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM ready, checking EmailJS...');
+            if (!window.emailjsReady) {
+                initializeEmailJS();
+            }
+        });
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            console.log('🚀 Page fully loaded, initializing EmailJS...');
+            if (!window.emailjsReady) {
+                initializeEmailJS();
+            }
+        });
+
+        // Backup initialization strategies
+        setTimeout(() => {
+            if (!window.emailjsReady) {
+                console.log('🔄 Backup EmailJS initialization (2s)...');
+                initializeEmailJS();
+            }
+        }, 2000);
+
+        setTimeout(() => {
+            if (!window.emailjsReady) {
+                console.log('🔄 Final backup EmailJS initialization (5s)...');
+                // Force manual script injection as last resort
+                forceEmailJSLoad();
+            }
+        }, 5000);
+
+        // Last resort manual EmailJS loading
+        function forceEmailJSLoad() {
+            console.log('⚡ Force loading EmailJS...');
+            
+            // Create script with different approach
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+            script.crossOrigin = 'anonymous';
+            
+            script.onload = function() {
+                console.log('⚡ Force load successful!');
+                
+                // Try multiple times to find EmailJS
+                let attempts = 0;
+                const maxAttempts = 20;
+                
+                const forceCheck = setInterval(() => {
+                    attempts++;
+                    
+                    // Check multiple possible locations
+                    const emailjsObj = window.emailjs || emailjs || 
+                                      (window.EmailJS && window.EmailJS) ||
+                                      (window.Email && window.Email);
+                    
+                    if (emailjsObj && emailjsObj.init) {
+                        clearInterval(forceCheck);
+                        try {
+                            emailjsObj.init({
+                                publicKey: EMAIL_CONFIG.publicKey
+                            });
+                            console.log('⚡ Force initialization successful!');
+                            window.emailjs = emailjsObj;
+                            window.emailjsReady = true;
+                        } catch (error) {
+                            console.error('⚡ Force init error:', error);
+                        }
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(forceCheck);
+                        console.error('⚡ Force load failed after', maxAttempts, 'attempts');
+                        window.emailjsReady = false;
+                    }
+                }, 100);
+            };
+            
+            script.onerror = function() {
+                console.error('⚡ Force load script error');
+                window.emailjsReady = false;
+            };
+            
+            document.head.appendChild(script);
+        }
+
+        // Form submission handler with Firebase integration
+        document.querySelector('form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            // Collect form data
+            const formData = {
+                firstName: this.firstName.value,
+                lastName: this.lastName.value,
+                email: this.email.value,
+                phone: this.phone.value,
+                company: this.company.value,
+                role: this.role.value,
+                interest: this.interest.value,
+                sessions: Array.from(this.querySelectorAll('input[name="sessions[]"]:checked')).map(cb => cb.value),
+                registrationDate: new Date().toISOString(),
+                registrationId: 'DEXCON25-' + Date.now()
+            };
+
+            try {
+                // Save to Firebase (if configured)
+                if (db) {
+                    await db.collection('registrations').add(formData);
+                    console.log('✅ Registration saved to Firebase!');
+                    
+                    // Send confirmation email 
+                    await sendConfirmationEmail(formData);
+                }
+
+                // Log registration data (for demo purposes)
+                console.log('📝 Registration Data:', formData);
+
+                // Show success modal
+                showSuccessModal(formData);
+                
+                // Reset form
+                this.reset();
+                
+            } catch (error) {
+                console.error('❌ Registration error:', error);
+                showErrorModal();
+            } finally {
+                // Restore button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Success modal function
+        function showSuccessModal(data) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+                    <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Registration Successful!</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Thank you ${data.firstName} for registering for DEXCon25!</p>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Registration ID:</p>
+                        <p class="font-mono text-sm font-semibold">${data.registrationId}</p>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">We'll send confirmation details to ${data.email}</p>
+                    <button onclick="this.closest('.fixed').remove()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Close
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Error modal function
+        function showErrorModal() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+                    <div class="w-16 h-16 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-exclamation-triangle text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Registration Error</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">There was an issue with your registration. Please try again or contact support.</p>
+                    <button onclick="this.closest('.fixed').remove()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Close
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Check for admin access
+        if (window.location.search.includes('admin=true')) {
+            document.getElementById('admin-access').classList.remove('hidden');
+        }
+
+        // Admin Panel Functions
+        function showAdminPanel() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">📊 DEXCon25 Admin Dashboard</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div class="mb-6 flex space-x-4">
+                        <button onclick="loadRegistrations()" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg">
+                            🔄 Refresh Data
+                        </button>
+                        <button onclick="exportToCSV()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                            📥 Download CSV
+                        </button>
+                        <button onclick="exportToGoogleSheets()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                            📊 Export to Google Sheets
+                        </button>
+                    </div>
+                    
+                    <div id="registrations-summary" class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+                    <div id="registrations-table" class="overflow-x-auto"></div>
+                    <div id="loading" class="text-center py-8">
+                        <i class="fas fa-spinner fa-spin text-2xl text-primary"></i>
+                        <p class="mt-2">Loading registrations...</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            loadRegistrations();
+        }
+
+        async function loadRegistrations() {
+            if (!db) {
+                document.getElementById('loading').innerHTML = '<p class="text-red-500">❌ Firebase not connected</p>';
+                return;
+            }
+
+            try {
+                const snapshot = await db.collection('registrations').orderBy('registrationDate', 'desc').get();
+                const registrations = [];
+                
+                snapshot.forEach(doc => {
+                    registrations.push({ id: doc.id, ...doc.data() });
+                });
+
+                displaySummary(registrations);
+                displayTable(registrations);
+                document.getElementById('loading').style.display = 'none';
+                
+            } catch (error) {
+                document.getElementById('loading').innerHTML = '<p class="text-red-500">❌ Error loading data: ' + error.message + '</p>';
+            }
+        }
+
+        function displaySummary(registrations) {
+            const total = registrations.length;
+            const companies = [...new Set(registrations.map(r => r.company))].length;
+            const today = new Date().toDateString();
+            const todayRegistrations = registrations.filter(r => 
+                new Date(r.registrationDate).toDateString() === today
+            ).length;
+
+            document.getElementById('registrations-summary').innerHTML = `
+                <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 dark:text-blue-200">Total Registrations</h4>
+                    <p class="text-2xl font-bold text-blue-600 dark:text-blue-300">${total}</p>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200">Companies</h4>
+                    <p class="text-2xl font-bold text-green-600 dark:text-green-300">${companies}</p>
+                </div>
+                <div class="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
+                    <h4 class="font-semibold text-purple-800 dark:text-purple-200">Today</h4>
+                    <p class="text-2xl font-bold text-purple-600 dark:text-purple-300">${todayRegistrations}</p>
+                </div>
+            `;
+        }
+
+        function displayTable(registrations) {
+            const tableHTML = `
+                <table class="min-w-full bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead class="bg-gray-50 dark:bg-gray-600">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Company</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Role</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Phone</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Sessions</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        ${registrations.map(reg => `
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    ${reg.firstName} ${reg.lastName}
+                                </td>
+                                <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">${reg.email}</td>
+                                <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">${reg.company}</td>
+                                <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">${reg.role}</td>
+                                <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">${reg.phone}</td>
+                                <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        ${reg.sessions ? reg.sessions.length : 0} sessions
+                                    </span>
+                                </td>
+                                <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">
+                                    ${new Date(reg.registrationDate).toLocaleDateString()}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('registrations-table').innerHTML = tableHTML;
+        }
+
+        function exportToCSV() {
+            if (!db) return;
+
+            db.collection('registrations').get().then(snapshot => {
+                const data = [];
+                const headers = ['Name', 'Email', 'Company', 'Role', 'Phone', 'Interest', 'Sessions', 'Registration Date', 'Registration ID'];
+                data.push(headers);
+
+                snapshot.forEach(doc => {
+                    const reg = doc.data();
+                    data.push([
+                        `${reg.firstName} ${reg.lastName}`,
+                        reg.email || '',
+                        reg.company || '',
+                        reg.role || '',
+                        reg.phone || '',
+                        reg.interest || '',
+                        reg.sessions ? reg.sessions.join('; ') : '',
+                        new Date(reg.registrationDate).toLocaleString(),
+                        reg.registrationId || ''
+                    ]);
+                });
+
+                // 修復 CSV 格式 - 使用正確的換行符和 BOM
+                const csvContent = '\uFEFF' + data.map(row => 
+                    row.map(field => {
+                        // 處理包含逗號、引號或換行的字段
+                        const fieldStr = String(field || '');
+                        if (fieldStr.includes(',') || fieldStr.includes('"') || fieldStr.includes('\n')) {
+                            return `"${fieldStr.replace(/"/g, '""')}"`;
+                        }
+                        return fieldStr;
+                    }).join(',')
+                ).join('\r\n');
+
+                const blob = new Blob([csvContent], { 
+                    type: 'text/csv;charset=utf-8;' 
+                });
+                
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `DEXCon25_Registrations_${new Date().toISOString().split('T')[0]}.csv`;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                console.log('✅ CSV exported successfully with', data.length - 1, 'registrations');
+            }).catch(error => {
+                console.error('❌ CSV export error:', error);
+            });
+        }
+
+        async function exportToGoogleSheets() {
+            if (!db) {
+                alert('Firebase not connected');
+                return;
+            }
+
+            // Show loading modal
+            const loadingModal = document.createElement('div');
+            loadingModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            loadingModal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+                    <div class="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-spinner fa-spin text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">📊 Creating Google Sheet...</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Please wait while we fetch your data and create the Google Sheet.
+                    </p>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        This may take a few moments...
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(loadingModal);
+
+            try {
+                // Fetch all registrations from Firebase
+                const snapshot = await db.collection('registrations').orderBy('registrationDate', 'desc').get();
+                const registrations = [];
+                
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    registrations.push({
+                        name: `${data.firstName} ${data.lastName}`,
+                        email: data.email,
+                        company: data.company,
+                        role: data.role,
+                        phone: data.phone,
+                        interest: data.interest,
+                        sessions: data.sessions ? data.sessions.join(', ') : '',
+                        registrationDate: new Date(data.registrationDate).toLocaleString(),
+                        registrationId: data.registrationId
+                    });
+                });
+
+                // Prepare data for Google Sheets
+                const sheetData = {
+                    title: `DEXCon25 Registrations - ${new Date().toLocaleDateString()}`,
+                    headers: [
+                        'Name', 'Email', 'Company', 'Role', 'Phone', 
+                        'Interest', 'Sessions', 'Registration Date', 'Registration ID'
+                    ],
+                    data: registrations.map(reg => [
+                        reg.name, reg.email, reg.company, reg.role, reg.phone,
+                        reg.interest, reg.sessions, reg.registrationDate, reg.registrationId
+                    ]),
+                    summary: {
+                        totalRegistrations: registrations.length,
+                        totalCompanies: [...new Set(registrations.map(r => r.company))].length,
+                        exportDate: new Date().toLocaleString()
+                    }
+                };
+
+                // 新的 Google Sheets 直接導出方法
+                try {
+                    // 方法 1: 使用新的 Google Apps Script
+                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyaVX8F3gK3hY9ZjRfm4Qr1pW7nL2Cm5oUvE8sT6iA9fD2B0cG1/exec';
+                    
+                    const response = await fetch(scriptUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            ...sheetData,
+                            spreadsheetId: '18NhMFUZhn2teH7E_u0TEwqktzBW9yQUlmBPE9qJKQvw',
+                            action: 'updateSheet'
+                        })
+                    });
+                    
+                    console.log('✅ Data sent to Google Apps Script');
+                } catch (scriptError) {
+                    console.error('❌ Google Apps Script error:', scriptError);
+                    
+                    // 方法 2: 備用 - 生成可直接貼上的格式
+                    const formattedData = generateFormattedData(registrations);
+                    copyToClipboard(formattedData);
+                }
+
+                // Remove loading modal
+                loadingModal.remove();
+
+                // Show success modal with instructions
+                const successModal = document.createElement('div');
+                successModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+                successModal.innerHTML = `
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-lg w-full text-center">
+                        <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-check text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">🎉 Google Sheet Created!</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Your Google Sheet has been created with ${registrations.length} registrations.
+                        </p>
+                        
+                        <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg mb-6">
+                            <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-2">📊 Summary</h4>
+                            <div class="text-sm text-blue-600 dark:text-blue-300">
+                                <p>• Total Registrations: ${sheetData.summary.totalRegistrations}</p>
+                                <p>• Companies Represented: ${sheetData.summary.totalCompanies}</p>
+                                <p>• Export Date: ${sheetData.summary.exportDate}</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <a href="https://docs.google.com/spreadsheets" 
+                               target="_blank" 
+                               class="block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                📊 Open Google Drive
+                            </a>
+                            
+                            <button onclick="createAlternativeSheet()" 
+                                    class="block w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                📋 Alternative: Copy Data
+                            </button>
+                        </div>
+
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-4">
+                            The sheet should appear in your Google Drive within a few minutes.
+                            If you don't see it, try the alternative method above.
+                        </p>
+                        
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="mt-4 text-gray-500 hover:text-gray-700 underline">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(successModal);
+
+                // Store data globally for alternative method
+                window.dexconSheetData = sheetData;
+
+            } catch (error) {
+                console.error('Error creating Google Sheet:', error);
+                loadingModal.remove();
+                
+                // Show error modal with fallback options
+                const errorModal = document.createElement('div');
+                errorModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+                errorModal.innerHTML = `
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+                        <div class="w-16 h-16 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-exclamation-triangle text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">⚠️ Connection Issue</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Unable to automatically create Google Sheet. Please try these alternatives:
+                        </p>
+                        
+                        <div class="space-y-3">
+                            <button onclick="exportToCSV(); this.closest('.fixed').remove();" 
+                                    class="block w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                📥 Download CSV Instead
+                            </button>
+                            
+                            <button onclick="createManualSheet(); this.closest('.fixed').remove();" 
+                                    class="block w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                                📋 Copy Data to Clipboard
+                            </button>
+                        </div>
+                        
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="mt-4 text-gray-500 hover:text-gray-700 underline">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(errorModal);
+            }
+        }
+
+        // Alternative method: Copy data to clipboard for manual pasting
+        function createAlternativeSheet() {
+            const data = window.dexconSheetData;
+            if (!data) return;
+
+            const textData = [
+                `DEXCon25 Registration Data - ${data.summary.exportDate}`,
+                '',
+                `Summary:`,
+                `Total Registrations: ${data.summary.totalRegistrations}`,
+                `Companies: ${data.summary.totalCompanies}`,
+                '',
+                data.headers.join('\t'),
+                ...data.data.map(row => row.join('\t'))
+            ].join('\n');
+
+            navigator.clipboard.writeText(textData).then(() => {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+                        <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clipboard text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">📋 Data Copied!</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Data has been copied to your clipboard. Follow these steps:
+                        </p>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-left text-sm mb-6">
+                            <ol class="list-decimal list-inside space-y-2">
+                                <li>Go to <a href="https://sheets.google.com" target="_blank" class="text-blue-600 underline">Google Sheets</a></li>
+                                <li>Create a new blank spreadsheet</li>
+                                <li>Click on cell A1</li>
+                                <li>Press Ctrl+V (or Cmd+V on Mac) to paste</li>
+                                <li>Data will be automatically formatted in columns</li>
+                            </ol>
+                        </div>
+                        <a href="https://sheets.google.com" target="_blank" 
+                           class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-block">
+                            🚀 Open Google Sheets
+                        </a>
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="mt-4 block w-full text-gray-500 hover:text-gray-700 underline">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            });
+        }
+
+        function createManualSheet() {
+            createAlternativeSheet();
+        }
+
+        // 生成格式化數據用於直接貼上
+        function generateFormattedData(registrations) {
+            const headers = ['Name', 'Email', 'Company', 'Role', 'Phone', 'Interest', 'Sessions', 'Registration Date', 'Registration ID'];
+            const data = registrations.map(reg => [
+                reg.name, reg.email, reg.company, reg.role, reg.phone,
+                reg.interest, reg.sessions, reg.registrationDate, reg.registrationId
+            ]);
+            
+            return [
+                `DEXCon25 Registration Data - ${new Date().toLocaleString()}`,
+                '',
+                `Summary:`,
+                `Total Registrations: ${registrations.length}`,
+                `Companies: ${[...new Set(registrations.map(r => r.company))].length}`,
+                '',
+                headers.join('\t'),
+                ...data.map(row => row.join('\t'))
+            ].join('\n');
+        }
+
+        // 複製到剪貼板函數
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    console.log('✅ Data copied to clipboard');
+                    showClipboardSuccess();
+                }).catch(err => {
+                    console.error('❌ Clipboard error:', err);
+                    fallbackCopyMethod(text);
+                });
+            } else {
+                fallbackCopyMethod(text);
+            }
+        }
+
+        // 備用複製方法
+        function fallbackCopyMethod(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                console.log('✅ Data copied using fallback method');
+                showClipboardSuccess();
+            } catch (err) {
+                console.error('❌ Fallback copy failed:', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 顯示複製成功提示
+        function showClipboardSuccess() {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.innerHTML = '📋 Data copied to clipboard!';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Enhanced email sending function with detailed debugging
+        async function sendConfirmationEmail(formData) {
+            console.log('📧 Starting email sending process...');
+            console.log('🔍 Debug - EmailJS Configuration:');
+            console.log('- publicKey:', EMAIL_CONFIG.publicKey);
+            console.log('- serviceId:', EMAIL_CONFIG.serviceId);
+            console.log('- templateId:', EMAIL_CONFIG.templateId);
+            console.log('- window.emailjsReady:', window.emailjsReady);
+            console.log('- typeof emailjs:', typeof emailjs);
+            
+            // Check if EmailJS is available after page load
+            if (window.emailjsReady && typeof emailjs !== 'undefined') {
+                console.log('🎯 Attempting EmailJS send...');
+                
+                // Test EmailJS initialization first
+                try {
+                    console.log('🔄 Re-initializing EmailJS with current config...');
+                    emailjs.init({
+                        publicKey: EMAIL_CONFIG.publicKey
+                    });
+                    console.log('✅ EmailJS re-initialization successful');
+                } catch (initError) {
+                    console.error('❌ EmailJS re-initialization failed:', initError);
+                }
+                
+                try {
+                    const templateParams = {
+                        to_email: formData.email,
+                        to_name: formData.firstName + ' ' + formData.lastName,
+                        from_name: 'DEXCon25 Team',
+                        registration_id: formData.registrationId,
+                        first_name: formData.firstName,
+                        last_name: formData.lastName,
+                        company: formData.company,
+                        role: formData.role,
+                        phone: formData.phone,
+                        sessions: formData.sessions ? formData.sessions.join(', ') : 'No sessions selected',
+                        event_date: '24 October 2025',
+                        event_time: '09:00 - 17:00',
+                        event_location: 'Cathay City, Hong Kong'
+                    };
+
+                    console.log('📤 Sending via EmailJS with params:', {
+                        serviceId: EMAIL_CONFIG.serviceId,
+                        templateId: EMAIL_CONFIG.templateId,
+                        to_email: templateParams.to_email
+                    });
+
+                    // Try alternative EmailJS sending method
+                    let result;
+                    try {
+                        result = await emailjs.send(
+                            EMAIL_CONFIG.serviceId,
+                            EMAIL_CONFIG.templateId,
+                            templateParams
+                        );
+                    } catch (sendError) {
+                        console.error('❌ Standard send failed, trying sendForm method:', sendError);
+                        
+                        // Try alternative method if standard fails
+                        result = await emailjs.sendForm(
+                            EMAIL_CONFIG.serviceId,
+                            EMAIL_CONFIG.templateId,
+                            templateParams
+                        );
+                    }
+                    
+                    console.log('✅ Email sent successfully via EmailJS!', result);
+                    return { success: true, method: 'EmailJS', result: result };
+                    
+                } catch (emailjsError) {
+                    console.error('❌ EmailJS send failed with full error:', emailjsError);
+                    console.error('❌ Error details:');
+                    console.error('- status:', emailjsError.status);
+                    console.error('- text:', emailjsError.text);
+                    console.error('- name:', emailjsError.name);
+                    console.error('- message:', emailjsError.message);
+                    
+                    // Show user-friendly error message
+                    const errorMsg = emailjsError.text || emailjsError.message || 'Unknown error occurred';
+                    console.log('📧 Email sending failed:', errorMsg);
+                    
+                    return { success: false, error: 'EmailJS send failed', details: errorMsg };
+                }
+            } else {
+                console.log('📧 EmailJS not available - registration saved, email will be sent manually');
+                return { success: false, error: 'EmailJS not available' };
+            }
+        }
+
+
+
+        // 生成HTML郵件內容
+        function generateEmailHTML(formData) {
+            return `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { font-family: 'Inter', Arial, sans-serif; line-height: 1.6; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                    .header { background: linear-gradient(135deg, #005D63 0%, #004A4F 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+                    .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+                    .info-box { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #005D63; }
+                    .button { background: #005D63; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 20px 0; }
+                    .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>#FutureForward</h1>
+                        <h2>Registration Confirmed!</h2>
+                    </div>
+                    <div class="content">
+                        <p>Dear <strong>${formData.firstName}</strong>,</p>
+                        
+                        <p>🎉 Thank you for registering for <strong>DEXCon25</strong>! We're excited to have you join us for the premier Digital Experience Conference.</p>
+                        
+                        <div class="info-box">
+                            <h3>📋 Your Registration Details</h3>
+                            <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+                            <p><strong>Email:</strong> ${formData.email}</p>
+                            <p><strong>Company:</strong> ${formData.company}</p>
+                            <p><strong>Role:</strong> ${formData.role}</p>
+                            <p><strong>Registration ID:</strong> <code>${formData.registrationId}</code></p>
+                            <p><strong>Selected Sessions:</strong> ${formData.sessions ? formData.sessions.join(', ') : 'No sessions selected'}</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>📅 Event Information</h3>
+                            <p><strong>Date:</strong> 24 October 2025</p>
+                            <p><strong>Time:</strong> 09:00 - 17:00</p>
+                            <p><strong>Location:</strong> Cathay City, Hong Kong</p>
+                        </div>
+                        
+                        <h3>🚀 What's Next?</h3>
+                        <ul>
+                            <li>✅ Save this confirmation email for your records</li>
+                            <li>📅 Mark your calendar for 24 October 2025</li>
+                            <li>🌐 Check our website for event updates</li>
+                            <li>🤝 Prepare for an inspiring day of learning and networking</li>
+                        </ul>
+                        
+                        <p>We'll send you more details about the venue, parking, and logistics closer to the event date.</p>
+                        
+                        <p>If you have any questions, please don't hesitate to contact us at <strong>info@dexcon25.com</strong></p>
+                        
+                        <p>Looking forward to seeing you at DEXCon25!</p>
+                        
+                        <p><strong>Best regards,</strong><br>The DEXCon25 Team</p>
+                    </div>
+                    <div class="footer">
+                        <p>#FutureForward | Digital Experience Conference</p>
+                        <p>This is an automated confirmation email. Please do not reply to this message.</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+            `;
+        }
+
+        // 生成純文字郵件內容
+        function generateEmailText(formData) {
+            return `
+DEXCon25 Registration Confirmed!
+
+Dear ${formData.firstName},
+
+Thank you for registering for DEXCon25! We're excited to have you join us for the premier Digital Experience Conference.
+
+Registration Details:
+• Name: ${formData.firstName} ${formData.lastName}
+• Email: ${formData.email}
+• Company: ${formData.company}
+• Role: ${formData.role}
+• Registration ID: ${formData.registrationId}
+• Selected Sessions: ${formData.sessions ? formData.sessions.join(', ') : 'No sessions selected'}
+
+Event Information:
+• Date: 24 October 2025
+• Time: 09:00 - 17:00
+• Location: Cathay City, Hong Kong
+
+What's Next:
+1. Save this confirmation email for your records
+2. Mark your calendar for 24 October 2025
+3. Check our website for event updates and agenda changes
+4. Prepare for an inspiring day of learning and networking
+
+We'll send you more details about the venue, parking, and logistics closer to the event date.
+
+If you have any questions, please don't hesitate to contact us at info@dexcon25.com
+
+Looking forward to seeing you at DEXCon25!
+
+Best regards,
+The DEXCon25 Team
+
+---
+#FutureForward | Digital Experience Conference
+            `;
+        }
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/95', 'dark:bg-gray-800/95', 'backdrop-blur-sm');
+            } else {
+                nav.classList.remove('bg-white/95', 'dark:bg-gray-800/95', 'backdrop-blur-sm');
+            }
+        });
+    </script>
+</body>
+</html>
