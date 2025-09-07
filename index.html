@@ -1700,13 +1700,15 @@
                 
                 try {
                     const templateParams = {
-                        to_email: formData.email,
+                        to_email: formData.companyEmail,
                         to_name: formData.firstName + ' ' + formData.lastName,
                         from_name: 'DEXCON2025 Team',
+                        from_email: 'dexcon2025@gmail.com',
+                        reply_to: 'dexcon2025@gmail.com',
                         registration_id: formData.registrationId,
                         first_name: formData.firstName,
                         last_name: formData.lastName,
-                        company: formData.company,
+                        company: formData.organization,
                         role: formData.role,
                         phone: formData.phone,
                         sessions: formData.sessions ? formData.sessions.join(', ') : 'No sessions selected',
