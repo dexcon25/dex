@@ -29,6 +29,14 @@
         /* GT Walsheim Font Face Declarations - GitHub CDN */
         @font-face {
             font-family: 'GT Walsheim';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT-Walsheim-Light-Trial-BF651b7fc714941.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'GT Walsheim';
             src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT%20Walsheim%20Regular.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
@@ -37,7 +45,7 @@
         
         @font-face {
             font-family: 'GT Walsheim';
-            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT%20Walsheim%20Regular.ttf') format('truetype');
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT-Walsheim-Medium-Trial-BF651b7fc728fb3.otf') format('opentype');
             font-weight: 500;
             font-style: normal;
             font-display: swap;
@@ -45,13 +53,21 @@
         
         @font-face {
             font-family: 'GT Walsheim';
-            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT%20Walsheim%20Regular.ttf') format('truetype');
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT-Walsheim-Bold-Trial-BF651b7fc737c57.otf') format('opentype');
             font-weight: 700;
             font-style: normal;
             font-display: swap;
         }
         
-        body { font-family: 'Inter', sans-serif; }
+        @font-face {
+            font-family: 'GT Walsheim';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT-Walsheim-Ultra-Bold-Trial-BF651b7fc6c21e5.otf') format('opentype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body { font-family: 'GT Walsheim', 'Inter', sans-serif; }
         .gradient-bg { background: linear-gradient(135deg, #005D63 0%, #004A4F 100%); }
         .cathay-logo {
             font-family: 'Inter', sans-serif;
@@ -69,6 +85,63 @@
         }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        /* Hero Animation Styles */
+        .hero-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .hero-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-title {
+            animation-delay: 0.2s;
+        }
+        
+        .hero-subtitle {
+            animation-delay: 0.4s;
+        }
+        
+        .hero-description {
+            animation-delay: 0.6s;
+        }
+        
+        .hero-info-box {
+            animation-delay: 0.8s;
+        }
+        
+        .hero-button {
+            animation-delay: 1.0s;
+        }
+        
+        /* Floating animation for info items */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .info-item {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .info-item:nth-child(1) { animation-delay: 0s; }
+        .info-item:nth-child(2) { animation-delay: 1s; }
+        .info-item:nth-child(3) { animation-delay: 2s; }
+        
+        /* Minimal Background with Subtle Shadow Effects */
+        .hero-background {
+            position: relative;
+            overflow: hidden;
+            /* 精緻陰影 - 白色發光陰影效果 */
+            box-shadow: 
+                inset 0 0 100px rgba(255,255,255,0.1),
+                inset 0 0 200px rgba(255,255,255,0.05),
+                0 0 50px rgba(255,255,255,0.08);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
@@ -79,7 +152,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Left: Logo/Brand -->
                 <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-primary gt-walsheim">DEXCON2025</h1>
+                    <h1 class="text-2xl font-normal text-primary gt-walsheim">DEXCON2025</h1>
                 </div>
                 
                 <!-- Right: Desktop Navigation Menu & Logo -->
@@ -137,17 +210,17 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="gradient-bg text-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">#FutureForward</h1>
-            <h2 class="text-2xl md:text-3xl font-light mb-8">Digital Experience Conference</h2>
-            <p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
+    <section class="gradient-bg hero-background text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-animate hero-title">#FutureForward</h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8 hero-animate hero-subtitle">Digital Experience Conference</h2>
+            <p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed hero-animate hero-description">
                 Join industry leaders, innovators, and community builders to explore the future of product development, design, and strategy. 
                 Connect, learn, and be inspired at the premier event for digital experience professionals.
             </p>
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-5xl mx-auto mb-12">
-                <div class="flex flex-row items-center justify-center space-x-2 md:space-x-8 text-lg">
-                    <div class="flex items-center">
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-5xl mx-auto mb-12 hero-animate hero-info-box">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
+                    <div class="flex items-center info-item">
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
                             <img 
                                 src="https://raw.githubusercontent.com/samson11769-cmd/font/233fdf2bed0a58582b7912b59f3d941ea20d8a4a/images/canlendar_v2.png" 
@@ -159,7 +232,7 @@
                         </div>
                         <span class="font-semibold">24 October 2025</span>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center info-item">
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
                             <img 
                                 src="https://raw.githubusercontent.com/samson11769-cmd/font/38577b8c89601a3fa5cd2741c5cd8c06894a3858/images/clock_v3.png" 
@@ -171,7 +244,7 @@
                         </div>
                         <span class="font-semibold">09:00 - 17:00</span>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center info-item">
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
                             <img 
                                 src="https://raw.githubusercontent.com/samson11769-cmd/font/69737123d668e30c1b24c620c261bdcfcfe80e05/images/freepik__background__63278.png" 
@@ -190,10 +263,9 @@
                         📊 Admin Dashboard
                     </button>
                 </div>
-                </div>
             </div>
-            <div class="text-center">
-                <a href="#contact" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block">
+            <div class="text-center hero-animate hero-button">
+                <a href="#contact" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 hover:scale-105 transition-all duration-300 inline-block shadow-lg hover:shadow-xl">
                     Register Now
                 </a>
             </div>
@@ -249,26 +321,26 @@
                 <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
                     <h3 class="text-2xl font-bold mb-6">Event Schedule Overview</h3>
                     <div class="space-y-4">
-                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
-                            <span class="font-semibold">Registration & Setup</span>
-                            <span class="text-primary">08:00 - 09:00</span>
-                        </div>
-                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                        <a href="#morning-block" class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg px-3 py-2 -mx-3 -my-2 transition-colors cursor-pointer">
+                            <span class="font-semibold">Reception & Registration</span>
+                            <span class="text-primary">09:00 - 09:30</span>
+                        </a>
+                        <a href="#morning-block" class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg px-3 py-2 -mx-3 -my-2 transition-colors cursor-pointer">
                             <span class="font-semibold">Morning Sessions</span>
                             <span class="text-primary">09:00 - 12:00</span>
-                        </div>
-                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                        </a>
+                        <a href="#afternoon-block" class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg px-3 py-2 -mx-3 -my-2 transition-colors cursor-pointer">
                             <span class="font-semibold">Lunch & Experience Booths</span>
                             <span class="text-primary">12:00 - 14:30</span>
-                        </div>
-                        <div class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600">
+                        </a>
+                        <a href="#afternoon-block" class="flex justify-between items-center pb-3 border-b border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg px-3 py-2 -mx-3 -my-2 transition-colors cursor-pointer">
                             <span class="font-semibold">Afternoon Block</span>
                             <span class="text-primary">14:30 - 16:15</span>
-                        </div>
-                        <div class="flex justify-between items-center">
+                        </a>
+                        <a href="#finale-block" class="flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg px-3 py-2 -mx-3 -my-2 transition-colors cursor-pointer">
                             <span class="font-semibold">Evening Cocktails</span>
                             <span class="text-primary">17:00+</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -284,7 +356,7 @@
             </div>
 
             <!-- Morning Block -->
-            <div class="mb-12">
+            <div id="morning-block" class="mb-12">
                 <h3 class="text-2xl font-bold mb-8 flex items-center">
                     <i class="fas fa-sun text-yellow-500 mr-3"></i>
                     Morning Block
@@ -295,10 +367,6 @@
                             <h4 class="text-xl font-semibold text-primary">Reception & Registration</h4>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">09:00 - 09:30</span>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">Lanyards & swag pickup</p>
-                        <div class="text-sm text-gray-500 dark:text-gray-500">
-                            <strong>PIC:</strong> @Amy Wong
-                        </div>
                     </div>
 
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
@@ -306,9 +374,8 @@
                             <h4 class="text-xl font-semibold text-primary">Opening Speech</h4>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">09:35 - 09:45</span>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">Welcome speech, DEXCON2025 vision and context, setting the tone of the day</p>
                         <div class="text-sm text-gray-500 dark:text-gray-500">
-                            <strong>Speaker:</strong> @Andrew Eldon
+                            <strong>Speaker:</strong> General Manager, Digital Experience - Andrew Eldon
                         </div>
                     </div>
 
@@ -318,15 +385,15 @@
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">10:00 - 10:45</span>
                         </div>
                         <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                            <div>• Strategy: "Connecting the Dots: Our Strategic Compass"</div>
                             <div>• Design: "Designing with Empathy: Inclusive UX at Scale"</div>
                             <div>• Product: "Small Bets, Big Outcomes: Rapid Product Discovery"</div>
-                            <div>• Strategy: "Connecting the Dots: Our Strategic Compass"</div>
+                            <div>• Delivery: "Living the Loop: Agile in Aviation"</div>
                             <div>• Portfolio: "Vision, Value, Velocity: Managing What Matters"</div>
                             <div>• Product Ops: "Operational Zen: Driving Efficiency Across Teams"</div>
-                            <div>• Delivery: "Living the Loop: Agile in Aviation"</div>
                         </div>
                         <div class="text-sm text-gray-500 dark:text-gray-500">
-                            <strong>Speakers:</strong> All Heads of Departments
+                            <strong>Speakers:</strong> Heads of Department
                         </div>
                     </div>
 
@@ -335,16 +402,15 @@
                             <h4 class="text-xl font-semibold text-primary">External Keynote: The Future of Digital Travel</h4>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">11:00 - 11:45</span>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">20-30 mins sharing + 15 mins Q&A covering AI Platform Trip Planning and Personalization Journey</p>
                         <div class="text-sm text-gray-500 dark:text-gray-500">
-                            <strong>Speaker:</strong> Senior leader from top airline/digital consultancy/travel tech firm
+                            <strong>Speaker:</strong> TBC
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Afternoon Block -->
-            <div class="mb-12">
+            <div id="afternoon-block" class="mb-12">
                 <h3 class="text-2xl font-bold mb-8 flex items-center">
                     <i class="fas fa-sun text-orange-500 mr-3"></i>
                     Afternoon Block
@@ -355,7 +421,7 @@
                             <h4 class="text-xl font-semibold text-primary">Lunch & Experience Booths</h4>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">12:00 - 14:30</span>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">Casual catered lunch with assigned seating + Interactive booths featuring design system demos, product journey maps, Poly U Empathy Lab, and "We are DEX!" showcase</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">You can experience how Digital practice embed into our daily tasks</p>
                     </div>
 
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
@@ -365,14 +431,14 @@
                         </div>
                         <p class="text-gray-600 dark:text-gray-400 mb-3">"Why Humans Do What They Do: Lessons for Digital Experiences"</p>
                         <div class="text-sm text-gray-500 dark:text-gray-500">
-                            <strong>Speaker:</strong> Behavioral designer, customer psychologist, or service design leader
+                            <strong>Speaker:</strong> Professor, Poly U School of Design
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Finale Block -->
-            <div>
+            <div id="finale-block">
                 <h3 class="text-2xl font-bold mb-8 flex items-center">
                     <i class="fas fa-moon text-purple-500 mr-3"></i>
                     Finale Block
@@ -385,17 +451,11 @@
                         </div>
                         <p class="text-gray-600 dark:text-gray-400 mb-3">Interactive storytelling workshop covering failure, resilience, unexpected insights, and bold pivots</p>
                         <div class="text-sm text-gray-500 dark:text-gray-500">
-                            <strong>Facilitators:</strong> MC and DEXers
+                            <strong>Facilitators:</strong> DEXers from Membership Team
                         </div>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                            <h4 class="text-xl font-semibold text-primary">Closing & Group Photo</h4>
-                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">16:15 - 16:45</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Official closing and group photography session</p>
-                    </div>
+
 
                     <div class="bg-gradient-to-r from-primary to-primary-dark text-white p-6 rounded-xl shadow-lg">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
@@ -418,13 +478,21 @@
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg card-hover text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                        AE
+                <div class="p-6 rounded-xl shadow-lg card-hover text-center" style="background-color: #083e7a;">
+                    <div class="w-24 h-24 mx-auto mb-4 relative bg-white rounded-full shadow-lg">
+                        <img 
+                            src="https://raw.githubusercontent.com/samson11769-cmd/font/6ab4bb5e0411ff3131f97d1353f293fe7bdbc7fb/images/head.png" 
+                            alt="Andrew Eldon - General Manager, Digital Experience" 
+                            class="w-24 h-24 rounded-full object-cover border-2 border-black shadow-lg"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                        />
+                        <div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                            AE
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Andrew Eldon</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Opening Keynote Speaker</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500">DEXCON2025 vision and strategic context</p>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Andrew Eldon</h3>
+                    <p class="text-gray-300 mb-4">Key Speaker</p>
                 </div>
                 
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg card-hover text-center">
@@ -534,18 +602,61 @@
                     </div>
                     
                     <div>
-                        <label for="email" class="block text-sm font-medium mb-2">Email Address</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                        <label for="company" class="block text-sm font-medium mb-2">Company Email Address</label>
+                        <input type="email" id="company" name="company" placeholder="name@company.com" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
                     </div>
                     
                     <div>
-                        <label for="phone" class="block text-sm font-medium mb-2">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+852 XXXX XXXX" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                        <label for="phone" class="block text-sm font-medium mb-2">Phone Number <span class="text-gray-500 font-normal">(Optional)</span></label>
+                        <div class="flex">
+                            <select id="countryCode" name="countryCode" class="px-3 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-l-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors bg-gray-50 dark:bg-gray-700">
+                                <option value="+852">🇭🇰 +852</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+65">🇸🇬 +65</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+82">🇰🇷 +82</option>
+                                <option value="+886">🇹🇼 +886</option>
+                                <option value="+60">🇲🇾 +60</option>
+                                <option value="+66">🇹🇭 +66</option>
+                                <option value="+84">🇻🇳 +84</option>
+                                <option value="+62">🇮🇩 +62</option>
+                                <option value="+63">🇵🇭 +63</option>
+                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+64">🇳🇿 +64</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+7">🇷🇺 +7</option>
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+54">🇦🇷 +54</option>
+                                <option value="+56">🇨🇱 +56</option>
+                                <option value="+57">🇨🇴 +57</option>
+                                <option value="+51">🇵🇪 +51</option>
+                                <option value="+27">🇿🇦 +27</option>
+                                <option value="+20">🇪🇬 +20</option>
+                                <option value="+971">🇦🇪 +971</option>
+                                <option value="+966">🇸🇦 +966</option>
+                                <option value="+972">🇮🇱 +972</option>
+                                <option value="+90">🇹🇷 +90</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" placeholder="XXXX XXXX" class="flex-1 px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-r-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors border-l-0">
+                        </div>
                     </div>
                     
                     <div>
-                        <label for="company" class="block text-sm font-medium mb-2">Company</label>
-                        <input type="text" id="company" name="company" class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
+                        <label for="organization" class="block text-sm font-medium mb-2">Organization</label>
+                        <input type="text" id="organization" name="organization" placeholder="Company, University, Institution, etc." class="w-full px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors" required>
                     </div>
                     
                     <div>
@@ -557,58 +668,68 @@
                         <label class="block text-sm font-medium mb-4">Which sessions would you like to attend? (Select all that apply)</label>
                         <div class="space-y-3">
                             <label class="flex items-start">
-                                <input type="checkbox" name="sessions[]" value="opening-speech" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
-                                    <span class="text-base font-medium">Opening Speech</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">Welcome speech and DEXCON2025 vision (09:35-09:45)</p>
-                                </div>
-                            </label>
-                            
-                            <label class="flex items-start">
                                 <input type="checkbox" name="sessions[]" value="rapid-fire-talks" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <span class="text-base font-medium">Rapid Fire Talks</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">6 x 7-minute talks on Design, Product, Strategy & more (10:00-10:45)</p>
+                                    <span class="text-sm text-primary font-medium float-right">10:00-10:45</span>
+                                    <div class="clear-both">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">6 x 7-minute talks on Design, Product, Strategy & more</p>
+                                    </div>
                                 </div>
                             </label>
                             
                             <label class="flex items-start">
                                 <input type="checkbox" name="sessions[]" value="keynote-digital-travel" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <span class="text-base font-medium">External Keynote: The Future of Digital Travel</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">AI Platform Trip Planning & Personalization (11:00-11:45)</p>
+                                    <span class="text-sm text-primary font-medium float-right">11:00-11:45</span>
+                                    <div class="clear-both">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">AI Platform Trip Planning & Personalization</p>
+                                    </div>
                                 </div>
                             </label>
                             
                             <label class="flex items-start">
                                 <input type="checkbox" name="sessions[]" value="experience-booths" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <span class="text-base font-medium">Experience Booths</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">Interactive demos, journey maps & Poly U Empathy Lab (12:00-14:30)</p>
+                                    <span class="text-sm text-primary font-medium float-right">12:00-14:30</span>
+                                    <div class="clear-both">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Interactive demos, journey maps & Poly U Empathy Lab</p>
+                                    </div>
                                 </div>
                             </label>
                             
                             <label class="flex items-start">
                                 <input type="checkbox" name="sessions[]" value="psychology-experience" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <span class="text-base font-medium">Psychology of Experience</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">Understanding human behavior in digital experiences (14:30-15:15)</p>
+                                    <span class="text-sm text-primary font-medium float-right">14:30-15:15</span>
+                                    <div class="clear-both">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Understanding human behavior in digital experiences</p>
+                                    </div>
                                 </div>
                             </label>
                             
                             <label class="flex items-start">
                                 <input type="checkbox" name="sessions[]" value="storytelling-workshop" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <span class="text-base font-medium">Storytelling from the Edge</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">Interactive workshop on failure, resilience & insights (15:15-16:15)</p>
+                                    <span class="text-sm text-primary font-medium float-right">15:15-16:15</span>
+                                    <div class="clear-both">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Interactive workshop on failure, resilience & insights</p>
+                                    </div>
                                 </div>
                             </label>
                             
                             <label class="flex items-start">
                                 <input type="checkbox" name="sessions[]" value="evening-cocktails" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <span class="text-base font-medium">Evening Cocktails</span>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">Networking drinks at Dakota/Catalina (17:00 onwards)</p>
+                                    <span class="text-sm text-primary font-medium float-right">17:00 onwards</span>
+                                    <div class="clear-both">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Networking drinks at Dakota/Catalina</p>
+                                    </div>
                                 </div>
                             </label>
                         </div>
@@ -637,33 +758,43 @@
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white py-12 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div class="md:text-left">
                     <h3 class="text-2xl font-bold text-primary mb-4 gt-walsheim">DEXCON2025</h3>
-                    <p class="text-gray-400">Digital Experience Conference - Where innovation meets inspiration.</p>
+                    <p class="text-gray-400 leading-relaxed">Digital Experience Conference - Where innovation meets inspiration.</p>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <div class="space-y-2">
-                        <a href="#event-info" class="block text-gray-400 hover:text-white transition-colors">Event Info</a>
-                        <a href="#agenda" class="block text-gray-400 hover:text-white transition-colors">Agenda</a>
-                        <a href="#speakers" class="block text-gray-400 hover:text-white transition-colors">Speakers</a>
-                        <a href="#why-attend" class="block text-gray-400 hover:text-white transition-colors">Why Attend</a>
+                    <h4 class="text-lg font-semibold mb-6 text-white">Quick Links</h4>
+                    <div class="space-y-3">
+                        <a href="#event-info" class="block text-gray-400 hover:text-white transition-colors duration-200">Event Info</a>
+                        <a href="#agenda" class="block text-gray-400 hover:text-white transition-colors duration-200">Agenda</a>
+                        <a href="#speakers" class="block text-gray-400 hover:text-white transition-colors duration-200">Speakers</a>
+                        <a href="#why-attend" class="block text-gray-400 hover:text-white transition-colors duration-200">Why Attend</a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <h4 class="text-lg font-semibold mb-6 text-white">Contact</h4>
                     <div class="space-y-2 text-gray-400">
-                        <p>Email: sammi_h_tang@cathaypacific.com</p>
-                        <p>Phone: +852 5698 6738</p>
-                        <p>Location: Cathay City, Hong Kong</p>
+                        <p class="text-white font-semibold text-lg">Sammi Tang</p>
+                        <p class="text-sm">Community and Culture Lead</p>
+                        <p class="text-sm text-gray-500 mb-3">Digital Experience Department</p>
+                        <div class="space-y-2">
+                            <p class="text-sm">
+                                <span class="text-gray-500">Email:</span><br>
+                                <a href="mailto:sammi_h_tang@cathaypacific.com" class="text-gray-300 hover:text-white transition-colors break-all">sammi_h_tang@cathaypacific.com</a>
+                            </p>
+                            <p class="text-sm">
+                                <span class="text-gray-500">T:</span> 
+                                <a href="tel:+85227476846" class="text-gray-300 hover:text-white transition-colors">+852 2747 6846</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 dark:border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <div class="border-t border-gray-800 dark:border-gray-700 mt-12 pt-8 text-center text-gray-500">
                 <p>&copy; PINNA CULTURE. All rights reserved.</p>
             </div>
         </div>
@@ -964,12 +1095,17 @@
             submitBtn.disabled = true;
 
             // Collect form data
+            const countryCode = this.countryCode.value;
+            const phoneNumber = this.phone.value;
+            const fullPhoneNumber = phoneNumber ? `${countryCode} ${phoneNumber}` : '';
+            
             const formData = {
                 firstName: this.firstName.value,
                 lastName: this.lastName.value,
-                email: this.email.value,
-                phone: this.phone.value,
-                company: this.company.value,
+                organization: this.organization.value,
+                phone: fullPhoneNumber,
+                countryCode: countryCode,
+                companyEmail: this.company.value,
                 role: this.role.value,
                 interest: this.interest.value,
                 sessions: Array.from(this.querySelectorAll('input[name="sessions[]"]:checked')).map(cb => cb.value),
@@ -1020,8 +1156,13 @@
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4">
                         <p class="text-sm text-gray-600 dark:text-gray-400">Registration ID:</p>
                         <p class="font-mono text-sm font-semibold">${data.registrationId}</p>
+                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                            <p><strong>Organization:</strong> ${data.organization}</p>
+                            <p><strong>Company Email:</strong> ${data.companyEmail}</p>
+                            ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
+                        </div>
                     </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">We'll send confirmation details to ${data.email}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">We'll send confirmation details to ${data.companyEmail}</p>
                     <button onclick="this.closest('.fixed').remove()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors">
                         Close
                     </button>
@@ -1735,6 +1876,25 @@ The DEXCon25 Team
 #FutureForward | Digital Experience Conference
             `;
         }
+
+        // Hero animations
+        function initHeroAnimations() {
+            // Trigger animations on page load
+            setTimeout(() => {
+                const heroElements = document.querySelectorAll('.hero-animate');
+                heroElements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('animate-in');
+                    }, index * 200);
+                });
+            }, 500); // Start animations after a small delay
+        }
+
+        // Initialize hero animations when page loads
+        window.addEventListener('load', initHeroAnimations);
+        
+        // Also initialize on DOM ready as fallback
+        document.addEventListener('DOMContentLoaded', initHeroAnimations);
 
         // Add scroll effect to navigation
         window.addEventListener('scroll', () => {
