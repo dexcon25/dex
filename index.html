@@ -883,13 +883,14 @@
             console.log('⚠️ Firebase config needed. Using demo mode.');
         }
 
-        // Initialize EmailJS
-        // ✅ EmailJS 已配置完成！
+        // Initialize EmailJS with HTML Email Support
+        // ✅ EmailJS 已配置完成 - 支援 HTML 格式郵件！
         const EMAIL_CONFIG = {
-            enabled: true, // ✅ 重新啟用 EmailJS - 問題是 Gmail API 權限，不是 Public Key
-            publicKey: '0BGcVqW8QO5dTBguj', // ✅ Public Key 實際上是有效的
-            serviceId: 'service_6fjzazy', // ✅ 更新為新的 Service ID
-            templateId: 'template_ut9fdrm' // ✅ 您的Template ID
+            enabled: true, // ✅ 重新啟用 EmailJS
+            publicKey: '0BGcVqW8QO5dTBguj', // ✅ Public Key 有效
+            serviceId: 'service_6fjzazy', // ✅ Gmail Service ID
+            templateId: 'template_ut9fdrm', // ✅ HTML Template ID
+            useHTML: true // ✅ 啟用 HTML 格式郵件
         };
 
         // Enhanced EmailJS initialization with comprehensive diagnostics
@@ -1739,7 +1740,10 @@
                         sessions: formData.sessions ? formData.sessions.join(', ') : 'No sessions selected',
                         event_date: '24 October 2025',
                         event_time: '09:00 - 17:00',
-                        event_location: 'Cathay City, Hong Kong'
+                        event_location: 'Cathay City, Hong Kong',
+                        // 添加 HTML 郵件內容
+                        html_content: generateEmailHTML(formData),
+                        message: generateEmailText(formData)
                     };
 
                     console.log('📤 Sending via EmailJS with params:', {
