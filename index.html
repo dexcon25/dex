@@ -1725,25 +1725,28 @@
                 }
                 
                 try {
+                    // 🎯 與 EmailJS 模板變數名完全匹配的參數
                     const templateParams = {
+                        // 📧 基本收件人信息
                         to_email: formData.companyEmail,
                         to_name: formData.firstName + ' ' + formData.lastName,
                         from_name: 'DEXCON2025 Team',
                         from_email: 'dexcon2025@gmail.com',
                         reply_to: 'dexcon2025@gmail.com',
-                        registration_id: formData.registrationId,
+                        
+                        // 👤 註冊者信息 - 完全匹配模板變數名
                         first_name: formData.firstName,
                         last_name: formData.lastName,
                         company: formData.organization,
                         role: formData.role,
                         phone: formData.phone,
+                        registration_id: formData.registrationId,
                         sessions: formData.sessions ? formData.sessions.join(', ') : 'No sessions selected',
+                        
+                        // 📅 活動信息 - 完全匹配模板變數名
                         event_date: '24 October 2025',
                         event_time: '09:00 - 17:00',
-                        event_location: 'Cathay City, Hong Kong',
-                        // 添加 HTML 郵件內容
-                        html_content: generateEmailHTML(formData),
-                        message: generateEmailText(formData)
+                        event_location: 'Cathay City, Hong Kong'
                     };
 
                     console.log('📤 Sending via EmailJS with params:', {
