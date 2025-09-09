@@ -1135,7 +1135,7 @@
                 interest: this.interest.value,
                 sessions: Array.from(this.querySelectorAll('input[name="sessions[]"]:checked')).map(cb => cb.value),
                 registrationDate: new Date().toISOString(),
-                registrationId: 'DX25-' + Math.random().toString(36).substring(2, 10).toUpperCase()
+                registrationId: 'DEXCON2025-' + Date.now()
             };
 
             try {
@@ -1823,8 +1823,8 @@
                             <h3>📋 Your Registration Details</h3>
                             <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
                             <p><strong>Email:</strong> ${formData.email}</p>
-                            <p><strong>Organization:</strong> ${formData.organization}</p>
-                            <p><strong>Job Title:</strong> ${formData.role}</p>
+                            <p><strong>Company:</strong> ${formData.company}</p>
+                            <p><strong>Role:</strong> ${formData.role}</p>
                             <p><strong>Registration ID:</strong> <code>${formData.registrationId}</code></p>
                             <p><strong>Selected Sessions:</strong> ${formData.sessions ? formData.sessions.join(', ') : 'No sessions selected'}</p>
                         </div>
@@ -1865,17 +1865,17 @@
         // 生成純文字郵件內容
         function generateEmailText(formData) {
             return `
-DEXCON2025 Registration Confirmed!
+DEXCon25 Registration Confirmed!
 
 Dear ${formData.firstName},
 
-Thank you for registering for DEXCON2025! We're excited to have you join us for the premier Digital Experience Conference.
+Thank you for registering for DEXCon25! We're excited to have you join us for the premier Digital Experience Conference.
 
 Registration Details:
 • Name: ${formData.firstName} ${formData.lastName}
 • Email: ${formData.email}
-• Organization: ${formData.organization}
-• Job Title: ${formData.role}
+• Company: ${formData.company}
+• Role: ${formData.role}
 • Registration ID: ${formData.registrationId}
 • Selected Sessions: ${formData.sessions ? formData.sessions.join(', ') : 'No sessions selected'}
 
@@ -1892,12 +1892,12 @@ What's Next:
 
 We'll send you more details about the venue, parking, and logistics closer to the event date.
 
-If you have any questions, please don't hesitate to contact us at info@dexcon2025.com
+If you have any questions, please don't hesitate to contact us at info@dexcon25.com
 
-Looking forward to seeing you at DEXCON2025!
+Looking forward to seeing you at DEXCon25!
 
 Best regards,
-The DEXCON2025 Team
+The DEXCon25 Team
 
 ---
 #FutureForward | Digital Experience Conference
