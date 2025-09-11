@@ -1177,6 +1177,23 @@
             const phoneNumber = this.phone.value;
             const fullPhoneNumber = phoneNumber ? `${countryCode} ${phoneNumber}` : '';
             
+            // Generate short registration ID (DEX25-0001, DEX25-0002, etc.)
+            let registrationId = 'DEX25-0001'; // Default fallback
+            
+            try {
+                if (db) {
+                    // Get current registration count to generate next ID
+                    const snapshot = await db.collection('registrations').get();
+                    const nextNumber = snapshot.size + 1;
+                    registrationId = `DEX25-${nextNumber.toString().padStart(4, '0')}`;
+                    console.log(`📝 Generated Registration ID: ${registrationId}`);
+                }
+            } catch (error) {
+                console.error('❌ Error generating registration ID:', error);
+                // Fallback to timestamp-based ID if Firebase fails
+                registrationId = `DEX25-${Date.now().toString().slice(-4)}`;
+            }
+            
             const formData = {
                 firstName: this.firstName.value,
                 lastName: this.lastName.value,
@@ -1188,7 +1205,7 @@
                 interest: this.interest.value,
                 sessions: Array.from(this.querySelectorAll('input[name="sessions[]"]:checked')).map(cb => cb.value),
                 registrationDate: new Date().toISOString(),
-                registrationId: 'DEXCON2025-' + Date.now()
+                registrationId: registrationId
             };
 
             try {
