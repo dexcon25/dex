@@ -1637,6 +1637,8 @@
                 
                 snapshot.forEach(doc => {
                     const data = doc.data();
+                    const userSessions = data.sessions || [];
+                    
                     registrations.push({
                         name: `${data.firstName} ${data.lastName}`,
                         email: data.email,
@@ -1644,22 +1646,32 @@
                         role: data.role,
                         phone: data.phone,
                         interest: data.interest,
-                        sessions: data.sessions ? data.sessions.join(', ') : '',
+                        // 分開6個Session欄位
+                        rapidFireTalks: userSessions.includes('rapid-fire-talks') ? 'Yes' : '',
+                        keynoteDigitalTravel: userSessions.includes('keynote-digital-travel') ? 'Yes' : '',
+                        experienceBooths: userSessions.includes('experience-booths') ? 'Yes' : '',
+                        psychologyExperience: userSessions.includes('psychology-experience') ? 'Yes' : '',
+                        storytellingWorkshop: userSessions.includes('storytelling-workshop') ? 'Yes' : '',
+                        eveningCocktails: userSessions.includes('evening-cocktails') ? 'Yes' : '',
                         registrationDate: new Date(data.registrationDate).toLocaleString(),
                         registrationId: data.registrationId
                     });
                 });
 
-                // Prepare data for Google Sheets
+                // Prepare data for Google Sheets - 分開6個Session欄位
                 const sheetData = {
                     title: `DEXCON2025 Registrations - ${new Date().toLocaleDateString()}`,
                     headers: [
-                        'Name', 'Email', 'Company', 'Role', 'Phone', 
-                        'Interest', 'Sessions', 'Registration Date', 'Registration ID'
+                        'Name', 'Email', 'Company', 'Role', 'Phone', 'Interest',
+                        'Rapid Fire Talks', 'Keynote Digital Travel', 'Experience Booths', 
+                        'Psychology Experience', 'Storytelling Workshop', 'Evening Cocktails',
+                        'Registration Date', 'Registration ID'
                     ],
                     data: registrations.map(reg => [
-                        reg.name, reg.email, reg.company, reg.role, reg.phone,
-                        reg.interest, reg.sessions, reg.registrationDate, reg.registrationId
+                        reg.name, reg.email, reg.company, reg.role, reg.phone, reg.interest,
+                        reg.rapidFireTalks, reg.keynoteDigitalTravel, reg.experienceBooths,
+                        reg.psychologyExperience, reg.storytellingWorkshop, reg.eveningCocktails,
+                        reg.registrationDate, reg.registrationId
                     ]),
                     summary: {
                         totalRegistrations: registrations.length,
@@ -1843,12 +1855,19 @@
             createAlternativeSheet();
         }
 
-        // 生成格式化數據用於直接貼上
+        // 生成格式化數據用於直接貼上 - 分開6個Session欄位
         function generateFormattedData(registrations) {
-            const headers = ['Name', 'Email', 'Company', 'Role', 'Phone', 'Interest', 'Sessions', 'Registration Date', 'Registration ID'];
+            const headers = [
+                'Name', 'Email', 'Company', 'Role', 'Phone', 'Interest',
+                'Rapid Fire Talks', 'Keynote Digital Travel', 'Experience Booths', 
+                'Psychology Experience', 'Storytelling Workshop', 'Evening Cocktails',
+                'Registration Date', 'Registration ID'
+            ];
             const data = registrations.map(reg => [
-                reg.name, reg.email, reg.company, reg.role, reg.phone,
-                reg.interest, reg.sessions, reg.registrationDate, reg.registrationId
+                reg.name, reg.email, reg.company, reg.role, reg.phone, reg.interest,
+                reg.rapidFireTalks, reg.keynoteDigitalTravel, reg.experienceBooths,
+                reg.psychologyExperience, reg.storytellingWorkshop, reg.eveningCocktails,
+                reg.registrationDate, reg.registrationId
             ]);
             
             return [
