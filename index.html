@@ -26,7 +26,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        /* GT Walsheim Font Face Declarations - GitHub CDN */
+        /* GT Walsheim Font Face Declarations */
         @font-face {
             font-family: 'GT Walsheim';
             src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/GT-Walsheim-Light-Trial-BF651b7fc714941.otf') format('opentype');
@@ -66,9 +66,51 @@
             font-style: normal;
             font-display: swap;
         }
+
+        /* Cathay Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Cathay Sans';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/CathaySans_Rg.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
         
-        body { font-family: 'GT Walsheim', 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #005D63 0%, #004A4F 100%); }
+        @font-face {
+            font-family: 'Cathay Sans';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/CathaySans_Bd.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Cathay Sans';
+            src: url('https://raw.githubusercontent.com/samson11769-cmd/font/main/CathaySans_MdIt.ttf') format('truetype');
+            font-weight: 500;
+            font-style: italic;
+            font-display: swap;
+        }
+        
+        /* Base body font: Cathay Sans (fallback to Inter) for body text */
+        body { 
+            font-family: 'Cathay Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+        }
+        
+        /* Cathay Sans Font Classes */
+        .cathay-sans {
+            font-family: 'Cathay Sans', 'Inter', sans-serif;
+            font-weight: 400;
+        }
+        
+        .cathay-sans-bold {
+            font-family: 'Cathay Sans', 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        .light-bg { 
+            background: #f0fdf4;
+            /* Light jade background */
+        }
         .cathay-logo {
             font-family: 'Inter', sans-serif;
             font-weight: 700;
@@ -77,11 +119,22 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .gt-walsheim {
+        /* GT Walsheim Font Classes */
+        .gt-walsheim-bold {
             font-family: 'GT Walsheim', 'Inter', 'Helvetica Neue', Arial, sans-serif;
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+        }
+        
+        .gt-walsheim {
+            font-family: 'GT Walsheim', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 400;
+        }
+        
+        .gt-walsheim-medium {
+            font-family: 'GT Walsheim', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 500;
         }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
@@ -118,19 +171,10 @@
             animation-delay: 1.0s;
         }
         
-        /* Floating animation for info items */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
+        /* Info items - no floating animation */
         .info-item {
-            animation: float 3s ease-in-out infinite;
+            /* Static positioning - no animation */
         }
-        
-        .info-item:nth-child(1) { animation-delay: 0s; }
-        .info-item:nth-child(2) { animation-delay: 1s; }
-        .info-item:nth-child(3) { animation-delay: 2s; }
         
         /* Minimal Background with Subtle Shadow Effects */
         .hero-background {
@@ -152,7 +196,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Left: Logo/Brand -->
                 <div class="flex items-center">
-                    <h1 class="text-2xl font-normal text-primary gt-walsheim">DEXCON2025</h1>
+                    <h1 class="text-2xl font-normal text-primary gt-walsheim-medium">DEXCON2025</h1>
                 </div>
                 
                 <!-- Right: Desktop Navigation Menu & Logo -->
@@ -210,15 +254,15 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="gradient-bg hero-background text-white py-20">
+    <section class="light-bg hero-background text-gray-900 py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-animate hero-title">#FutureForward</h1>
-            <h2 class="text-2xl md:text-3xl font-light mb-8 hero-animate hero-subtitle">Digital Experience Conference</h2>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-animate hero-title gt-walsheim-bold">#FutureForward</h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8 hero-animate hero-subtitle gt-walsheim">Digital Experience Conference</h2>
             <p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed hero-animate hero-description">
                 Join industry leaders, innovators, and community builders to explore the future of product development, design, and strategy. 
                 Connect, learn, and be inspired at the premier event for digital experience professionals.
             </p>
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-5xl mx-auto mb-12 hero-animate hero-info-box">
+            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 max-w-5xl mx-auto mb-12 hero-animate hero-info-box shadow-lg border border-white/20">
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
                     <div class="flex items-center info-item">
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
@@ -276,7 +320,7 @@
     <section id="event-info" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-6">Event Information</h2>
+                <h2 class="text-4xl font-bold mb-6 gt-walsheim">Event Information</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                     DEXCON2025 provides insight and inspiration for driving digital innovation across globally recognized challenges and opportunities, 
                     from a Hong Kong context.
@@ -351,7 +395,7 @@
     <section id="agenda" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-6">Conference Agenda</h2>
+                <h2 class="text-4xl font-bold mb-6 gt-walsheim">Conference Agenda</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400">A full day of insights, networking, and innovation</p>
             </div>
 
@@ -418,6 +462,14 @@
                 <div class="space-y-6">
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h4 class="text-xl font-semibold text-primary">Experience Booths</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">12:00 - 14:30</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">You can experience how Digital practice embed into our daily tasks</p>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                             <h4 class="text-xl font-semibold text-primary">Psychology of Experience</h4>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">14:30 - 15:15</span>
                         </div>
@@ -449,12 +501,12 @@
 
 
 
-                    <div class="bg-gradient-to-r from-primary to-primary-dark text-white p-6 rounded-xl shadow-lg">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                            <h4 class="text-xl font-semibold">Evening Cocktails</h4>
-                            <span class="text-lg font-medium">17:00 onwards</span>
+                            <h4 class="text-xl font-semibold text-primary">Evening Cocktails</h4>
+                            <span class="text-lg font-medium text-gray-500 dark:text-gray-400">17:00 onwards</span>
                         </div>
-                        <p class="opacity-90">Join us for evening cocktails at Dakota/Catalina (venue TBC)</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3">Join us for evening cocktails at Dakota/Catalina (venue TBC)</p>
                     </div>
                 </div>
             </div>
@@ -465,7 +517,7 @@
     <section id="speakers" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-6">Featured Speakers</h2>
+                <h2 class="text-4xl font-bold mb-6 gt-walsheim">Featured Speakers</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400">Learn from industry leaders and innovation experts</p>
             </div>
             
@@ -517,7 +569,7 @@
     <section id="why-attend" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-6">Why Attend DEXCON2025?</h2>
+                <h2 class="text-4xl font-bold mb-6 gt-walsheim">Why Attend DEXCON2025?</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                     DEXCON2025 is designed for business leaders, product managers, designers, and those responsible for digital transformation and user experience strategies.
                 </p>
@@ -625,7 +677,7 @@
     <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold mb-6">Register for DEXCON2025</h2>
+                <h2 class="text-4xl font-bold mb-6 gt-walsheim">Register for DEXCON2025</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400">
                     Don't miss this opportunity to connect, learn, and be inspired by the future of digital experience.
                 </p>
@@ -1725,7 +1777,7 @@
                 }
                 
                 try {
-                    // 🎯 與 EmailJS 模板變數名完全匹配的參數
+                    // 🎯 完整的 EmailJS 參數 - 包含調試和備用選項
                     const templateParams = {
                         // 📧 基本收件人信息
                         to_email: formData.companyEmail,
@@ -1739,21 +1791,30 @@
                         last_name: formData.lastName,
                         company: formData.organization,
                         role: formData.role,
-                        phone: formData.phone,
+                        phone: formData.phone || 'Not provided',
                         registration_id: formData.registrationId,
                         sessions: formData.sessions ? formData.sessions.join(', ') : 'No sessions selected',
                         
                         // 📅 活動信息 - 完全匹配模板變數名
                         event_date: '24 October 2025',
                         event_time: '09:00 - 17:00',
-                        event_location: 'Cathay City, Hong Kong'
+                        event_location: 'Cathay City, Hong Kong',
+                        
+                        // 🔧 調試參數 - 幫助確定問題
+                        debug_info: `Sent at ${new Date().toISOString()}`,
+                        test_html: '<strong>HTML Test</strong>',
+                        
+                        // 📧 完整郵件內容作為備用
+                        message_html: generateEmailHTML(formData),
+                        message_text: generateEmailText(formData)
                     };
 
-                    console.log('📤 Sending via EmailJS with params:', {
-                        serviceId: EMAIL_CONFIG.serviceId,
-                        templateId: EMAIL_CONFIG.templateId,
-                        to_email: templateParams.to_email
-                    });
+                    console.log('📤 EmailJS Debug Information:');
+                    console.log('- Service ID:', EMAIL_CONFIG.serviceId);
+                    console.log('- Template ID:', EMAIL_CONFIG.templateId);
+                    console.log('- To Email:', templateParams.to_email);
+                    console.log('- Template Params Keys:', Object.keys(templateParams));
+                    console.log('- Full Template Params:', templateParams);
 
                     // Try alternative EmailJS sending method
                     let result;
